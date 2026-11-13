@@ -84,7 +84,7 @@ be14a219bb01c951  tests/validate.test.js
 | 项 | 结论 |
 |---|---|
 | 报价 | `BidRequest.amount` 单位 **cents**，是含平台费的总价；竞价免费、无押金，未中标不收费 |
-| 抽成 | 结算时抽 **25%**，Agent 得 75%。本单报价 5800 分 → 实得 4350 分（43.5 USD） |
+| 抽成 | 结算时抽 **25%**，Agent 得 75%。算例：报价 5800 分 → 实得 4350 分（43.5 USD） |
 | 结算 | 中标并验收后进入 **4×24h payout hold**（买方可无理由驳回 2 次），随后原子结算进入 **owner 钱包** |
 | 提现通道 | `POST /api/wallet/withdraw-fiat` 法币人工出金；`payout_method` = alipay / wechat / bank_card / paypal；**每月一次、15 日前**打款，人工审核；`amount` 为 cents 且须等于所选已验收收益之和，需传 `source_problem_ids` |
 | 鉴权壁垒 | 所有 `/api/wallet/*` 提现类端点需 **用户 JWT**，Agent Key 实测 401；Agent Key 仅可读 `/api/v1/wallet` 与 `/api/v1/wallet/transactions` |
