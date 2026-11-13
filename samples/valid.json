@@ -1,0 +1,66 @@
+[
+  {
+    "titles": ["示例空间 · 秋日资源对接会开放报名", "三分钟看懂本期资源对接安排", "会员专属：本期活动亮点速览"],
+    "summary": "本期活动面向虚构会员企业，围绕资源对接与经验交流展开，全部信息为演示用占位内容。",
+    "lead": "以下为虚构演示文案，用于验证输出结构是否符合 Schema 约定，不代表任何真实活动安排。",
+    "sections": [
+      { "heading": "活动亮点", "kind": "highlights", "body": "设置三场主题交流，均为虚构安排。" },
+      { "heading": "分享嘉宾", "kind": "speakers", "body": "嘉宾以角色占位，不出现真实姓名。" },
+      { "heading": "流程安排", "kind": "agenda", "body": "签到、主题交流、自由对接三段式。" }
+    ],
+    "signup_block": { "text": "报名入口将在复核通过后由网关填充。", "link_placeholder": "{{signup_link}}" },
+    "cover_image_brief": "浅色底，中央为抽象几何色块与活动主题占位文字，不使用真实标识。"
+  },
+  {
+    "titles": ["虚构案例：如何让对接更有序", "一场对接会的五个准备动作", "从签到到复盘的结构化清单"],
+    "summary": "以虚构场景说明会前准备事项，供运营复核流程演示。",
+    "lead": "本文为结构校验样例，所有企业、场地与时间均为虚构占位。",
+    "sections": [
+      { "heading": "会前准备", "kind": "notes", "body": "确认场地容量、物料清单与角色分工。" },
+      { "heading": "现场流程", "kind": "agenda", "body": "按签到、交流、记录三段推进。" },
+      { "heading": "报名方式", "kind": "signup", "body": "通过占位链接进入报名流程。" },
+      { "heading": "补充说明", "kind": "other", "body": "本段为结构完整性占位。" }
+    ],
+    "signup_block": { "text": "请通过页面中的报名入口提交信息。", "link_placeholder": "{{signup_link}}" },
+    "cover_image_brief": "深蓝与米白配色，右下角留出标题占位区。"
+  },
+  {
+    "titles": ["季度复盘模板说明（虚构）", "用一张表看懂复盘口径", "复盘会怎么开更有效"],
+    "summary": "说明季度复盘材料的字段口径与填写方式，数据均为虚构。",
+    "lead": "适用范围仅限内部演示环境，不含真实经营数据。",
+    "sections": [
+      { "heading": "口径说明", "kind": "highlights", "body": "指标定义统一由数据字典给出。" },
+      { "heading": "材料清单", "kind": "notes", "body": "含周报、巡检表与问题单三类。" },
+      { "heading": "后续动作", "kind": "other", "body": "复核通过后归档至文档库。" }
+    ],
+    "signup_block": { "text": "如需参与，请使用页面报名入口。", "link_placeholder": "{{signup_link}}" },
+    "cover_image_brief": "表格化版式，顶部为标题占位，底部留出日期栏。",
+    "lint_issues": [{ "code": "REVIEW_PENDING", "message": "等待人工复核", "severity": "info" }]
+  },
+  {
+    "titles": ["新会员入门指引（演示版）", "入驻第一周可以做什么", "常见问题五问五答"],
+    "summary": "面向虚构新会员的入门说明，覆盖账号、资料与活动三个环节。",
+    "lead": "本文用于校验多小节与枚举取值，全部内容为占位。",
+    "sections": [
+      { "heading": "账号开通", "kind": "notes", "body": "由管理员按角色分配权限。" },
+      { "heading": "资料完善", "kind": "highlights", "body": "企业名称使用虚构占位值。" },
+      { "heading": "活动报名", "kind": "signup", "body": "报名状态以系统记录为准。" },
+      { "heading": "现场签到", "kind": "agenda", "body": "签到结果进入统计口径。" },
+      { "heading": "常见问答", "kind": "other", "body": "问答内容为演示占位。" }
+    ],
+    "signup_block": { "text": "报名入口由网关在发布阶段替换。", "link_placeholder": "{{signup_link}}" },
+    "cover_image_brief": "左侧为图标组占位，右侧为三行引导文案占位。"
+  },
+  {
+    "titles": ["场地预约规则更新说明", "关于预约时段的三个变化", "预约前请确认这几点"],
+    "summary": "虚构的场地预约规则变更说明，仅用于 Schema 结构验证。",
+    "lead": "所有时段、容量与角色均为示例值，不对应任何真实场地。",
+    "sections": [
+      { "heading": "变更点", "kind": "highlights", "body": "预约时段粒度调整为半小时。" },
+      { "heading": "影响范围", "kind": "notes", "body": "涉及工作台与小程序两端。" },
+      { "heading": "过渡安排", "kind": "agenda", "body": "旧规则保留一个过渡周期。" }
+    ],
+    "signup_block": { "text": "如需试用新规则，请通过报名入口登记。", "link_placeholder": "{{signup_link}}" },
+    "cover_image_brief": "日历格线为背景，中央为规则说明占位框。"
+  }
+]

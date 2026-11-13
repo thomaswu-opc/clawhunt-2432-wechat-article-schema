@@ -1,0 +1,83 @@
+[
+  {
+    "case": "titles 只有 2 项",
+    "expect": "minItems 3",
+    "payload": {
+      "titles": ["反例：标题数量不足", "反例：只有两项"],
+      "summary": "虚构反例，标题候选不足三项。",
+      "lead": "用于验证 minItems 约束。",
+      "sections": [
+        { "heading": "小节一", "kind": "notes", "body": "占位。" },
+        { "heading": "小节二", "kind": "agenda", "body": "占位。" },
+        { "heading": "小节三", "kind": "other", "body": "占位。" }
+      ],
+      "signup_block": { "text": "占位。", "link_placeholder": "{{signup_link}}" },
+      "cover_image_brief": "占位。"
+    }
+  },
+  {
+    "case": "titles 有 4 项",
+    "expect": "maxItems 3",
+    "payload": {
+      "titles": ["反例一", "反例二", "反例三", "反例四"],
+      "summary": "虚构反例，标题候选超过三项。",
+      "lead": "用于验证 maxItems 约束。",
+      "sections": [
+        { "heading": "小节一", "kind": "notes", "body": "占位。" },
+        { "heading": "小节二", "kind": "agenda", "body": "占位。" },
+        { "heading": "小节三", "kind": "other", "body": "占位。" }
+      ],
+      "signup_block": { "text": "占位。", "link_placeholder": "{{signup_link}}" },
+      "cover_image_brief": "占位。"
+    }
+  },
+  {
+    "case": "link_placeholder 不是固定占位符",
+    "expect": "const {{signup_link}}",
+    "payload": {
+      "titles": ["反例：占位符被改写", "反例：链接直写", "反例：应进入复核队列"],
+      "summary": "虚构反例，报名链接占位符不符合约定。",
+      "lead": "用于验证 const 约束。",
+      "sections": [
+        { "heading": "小节一", "kind": "notes", "body": "占位。" },
+        { "heading": "小节二", "kind": "signup", "body": "占位。" },
+        { "heading": "小节三", "kind": "other", "body": "占位。" }
+      ],
+      "signup_block": { "text": "占位。", "link_placeholder": "https://example.invalid/signup" },
+      "cover_image_brief": "占位。"
+    }
+  },
+  {
+    "case": "sections[].kind 取值不在枚举内",
+    "expect": "enum 6 种",
+    "payload": {
+      "titles": ["反例：类型越界", "反例：非法枚举值", "反例：结构校验应失败"],
+      "summary": "虚构反例，小节类型使用了未登记的取值。",
+      "lead": "用于验证 enum 约束。",
+      "sections": [
+        { "heading": "小节一", "kind": "unknown", "body": "占位。" },
+        { "heading": "小节二", "kind": "agenda", "body": "占位。" },
+        { "heading": "小节三", "kind": "other", "body": "占位。" }
+      ],
+      "signup_block": { "text": "占位。", "link_placeholder": "{{signup_link}}" },
+      "cover_image_brief": "占位。"
+    }
+  },
+  {
+    "case": "顶层出现未声明字段",
+    "expect": "additionalProperties false",
+    "payload": {
+      "titles": ["反例：多余字段", "反例：模型自行扩展", "反例：应被拒绝"],
+      "summary": "虚构反例，顶层多出一个未声明字段。",
+      "lead": "用于验证 additionalProperties 约束。",
+      "sections": [
+        { "heading": "小节一", "kind": "notes", "body": "占位。" },
+        { "heading": "小节二", "kind": "agenda", "body": "占位。" },
+        { "heading": "小节三", "kind": "other", "body": "占位。" }
+      ],
+      "signup_block": { "text": "占位。", "link_placeholder": "{{signup_link}}" },
+      "cover_image_brief": "占位。",
+      "model_confidence": 0.93
+    }
+  }
+]

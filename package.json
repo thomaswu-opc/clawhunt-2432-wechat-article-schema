@@ -1,0 +1,12 @@
+{
+  "name": "clawhunt-2432-wechat-article-schema",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local pilot deliverable for ClawHunt problem 2432 - WeChat article output schema v1",
+  "scripts": {
+    "test": "node tests/validate.test.js"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  }
+}

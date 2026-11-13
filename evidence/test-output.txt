@@ -1,0 +1,43 @@
+
+> clawhunt-2432-wechat-article-schema@1.0.0 test
+> node tests/validate.test.js
+
+=== 0. Schema 元信息 ===
+$schema = https://json-schema.org/draft/2020-12/schema
+PASS  方言为 draft 2020-12
+PASS  注册表登记了 ops.wechat_article v1
+PASS  注册表声明不得直接发布
+
+=== 1. 验收 4：Schema 通过 draft 2020-12 元模式校验 ===
+PASS  validateSchema(schema)  |  符合 2020-12 元模式
+
+=== 2. 验收 3：5 份合法样例全部通过 ===
+PASS  合法样例数量为 5  |  实际 5
+PASS  valid[1] 通过
+PASS  valid[2] 通过
+PASS  valid[3] 通过
+PASS  valid[4] 通过
+PASS  valid[5] 通过
+
+=== 3. 验收 3：5 份非法样例全部失败 ===
+PASS  非法样例数量为 5  |  实际 5
+PASS  invalid[1] 被拒绝 (titles 只有 2 项)  |  /titles minItems: must NOT have fewer than 3 items
+PASS  invalid[2] 被拒绝 (titles 有 4 项)  |  /titles maxItems: must NOT have more than 3 items
+PASS  invalid[3] 被拒绝 (link_placeholder 不是固定占位符)  |  /signup_block/link_placeholder const: must be equal to constant
+PASS  invalid[4] 被拒绝 (sections[].kind 取值不在枚举内)  |  /sections/0/kind enum: must be equal to one of the allowed values
+PASS  invalid[5] 被拒绝 (顶层出现未声明字段)  |  / additionalProperties: must NOT have additional properties
+
+=== 4. 验收 1：titles 为 2 项或 4 项均校验失败 ===
+PASS  titles=2 校验失败
+PASS  titles=4 校验失败
+
+=== 5. 验收 2：link_placeholder 非 const 校验失败 ===
+PASS  link_placeholder 被改写时校验失败  |  /signup_block/link_placeholder const: must be equal to constant
+
+=== 6. 附加结构约束抽查 ===
+PASS  sections 少于 3 项被拒绝
+PASS  section 内多余字段被拒绝
+PASS  summary 超 120 字被拒绝
+PASS  顶层可选 lint_issues 允许系统写入
+
+=== 汇总：全部通过 ===

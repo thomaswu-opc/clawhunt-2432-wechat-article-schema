@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/ops/wechat_article.v1.json",
+  "title": "公众号推文输出 Schema v1",
+  "description": "运营辅助模型输出的结构契约。校验通过的内容只进入 AI 复核队列，不得直接对外发送。全文总字数上限 5000 字由后置检查器负责，本 Schema 不重复实现。",
+  "$comment": "总字数上限、hook 去重等跨字段规则由 S5-GW 后置检查器承担；本文件只做单文档结构校验。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["titles", "summary", "lead", "sections", "signup_block", "cover_image_brief"],
+  "properties": {
+    "titles": {
+      "description": "正好 3 个标题候选，每项不超过 64 字。",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+    },
+    "summary": {
+      "description": "摘要，不超过 120 字。",
+      "type": "string",
+      "maxLength": 120
+    },
+    "lead": {
+      "description": "导语，不超过 300 字。",
+      "type": "string",
+      "maxLength": 300
+    },
+    "sections": {
+      "description": "分节正文，3 到 8 项。",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["heading", "kind", "body"],
+        "properties": {
+          "heading": { "description": "小节标题，不超过 20 字。", "type": "string", "minLength": 1, "maxLength": 20 },
+          "kind": {
+            "description": "小节类型。",
+            "enum": ["highlights", "speakers", "agenda", "signup", "notes", "other"]
+          },
+          "body": { "description": "小节正文，不超过 1500 字。", "type": "string", "maxLength": 1500 }
+        }
+      }
+    },
+    "signup_block": {
+      "description": "报名区块。费用文本不由模型计算，仅由下游原样引用 fee_text。",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "link_placeholder"],
+      "properties": {
+        "text": { "description": "报名引导文案，不超过 200 字。", "type": "string", "maxLength": 200 },
+        "link_placeholder": {
+          "description": "固定占位符，发布时由网关替换为真实报名链接。",
+          "const": "{{signup_link}}"
+        }
+      }
+    },
+    "cover_image_brief": {
+      "description": "封面图文字简报，不超过 200 字，仅供设计师参考，不是图片地址。",
+      "type": "string",
+      "maxLength": 200
+    },
+    "lint_issues": {
+      "description": "顶层可选。由系统复核时写入，模型输出中不得出现。",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 },
+          "severity": { "enum": ["info", "warn", "error"] }
+        }
+      }
+    }
+  }
+}
