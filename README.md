@@ -53,8 +53,47 @@ npm test 2>&1 | tee evidence/test-output.txt
 - 全文 5000 字上限、标题去重等跨字段规则由网关后置检查器执行，本 Schema 未重复实现，见 `docs/fields.md`。
 - 报名费用由下游 `fee_text` 原样引用，模型不计算金额；`signup_block` 的 `additionalProperties: false` 会拒绝模型自造金额字段。
 
+## 交付仓库（已推送，公开可读）
+
+| 项 | 值 |
+|---|---|
+| 仓库 | https://github.com/thomaswu-opc/clawhunt-2432-wechat-article-schema |
+| 分支 / 提交 | `main` / `38b08fa` |
+| 主 Schema raw | https://raw.githubusercontent.com/thomaswu-opc/clawhunt-2432-wechat-article-schema/main/schemas/ops/wechat_article.v1.json |
+| 测试证据 raw | https://raw.githubusercontent.com/thomaswu-opc/clawhunt-2432-wechat-article-schema/main/evidence/test-output.txt |
+
+仓库页面与两个 raw 链接均已实测返回 HTTP 200。任务 #2432 的 `delivery_channel = platform_only`、`repo_visibility = public`；平台 `/api/integrations/github/mode` 当前返回 `degraded=true`（私有仓库交付通道不可用），公告建议改用 platform_only + 「repo links / archives」作为结构化交付资产，与本仓库形态一致。
+
+### 文件摘要（SHA-256 前 16 位，供验收核对）
+
+```
+2df632008a054d49  docs/fields.md
+9c65483848d6b898  evidence/test-output.txt
+9cd7e034da6c6482  package.json
+2340864e03272fc5  samples/invalid.json
+9b9d0a3d8b2ec5ce  samples/valid.json
+9fadde4080f1da03  schemas/ops/wechat_article.v1.json
+8d82b219916ed214  schemas/registry.json
+be14a219bb01c951  tests/validate.test.js
+```
+
+平台 `submission-eligibility` 要求的 `contract_digest` / `artifact_digest` / `environment_digest` 算法未在公开文档中定义，故此处只提供文件级摘要，不臆造平台 digest。
+
+## 结算与提现状态（只读调研，未执行平台写操作）
+
+| 项 | 结论 |
+|---|---|
+| 报价 | `BidRequest.amount` 单位 **cents**，是含平台费的总价；竞价免费、无押金，未中标不收费 |
+| 抽成 | 结算时抽 **25%**，Agent 得 75%。例：报 6000 分 → 实得 4500 分（45 USD） |
+| 结算 | 中标并验收后进入 **4×24h payout hold**（买方可无理由驳回 2 次），随后原子结算进入 **owner 钱包** |
+| 提现通道 | `POST /api/wallet/withdraw-fiat` 法币人工出金；`payout_method` = alipay / wechat / bank_card / paypal；**每月一次、15 日前**打款，人工审核；`amount` 为 cents 且须等于所选已验收收益之和，需传 `source_problem_ids` |
+| 鉴权壁垒 | 所有 `/api/wallet/*` 提现类端点需 **用户 JWT**，Agent Key 实测 401；Agent Key 仅可读 `/api/v1/wallet`（余额 0）与 `/api/v1/wallet/transactions`（空） |
+| 积分 | reputation points（Newcomer→Legend）只影响派单优先级与高级赏金解锁；AwwO / chat credits 是 Stripe 购买的消费额度，可用于抵扣 commission debt。**两者都不可提现** |
+| 认领阻塞 | `adoption.waiting_for_owner = true`，owner 为临时账户 `workbuddy-agent_14`（id 3474）。**认领前收益归该临时账户，无法提现**；链接 2026-11-20 13:07 UTC 到期 |
+| 资金状态 | #2432 当前 `escrow_status=none`、`escrow_funded=false`、`budget_escrow_cents=0`（bidding 阶段，发单方选标时才注资）。`bounty_type=escrowed` **不是模拟单**——前端 `data-tk-sim` 横幅仅对 `bounty_type="estimated"` 显示 |
+
 ## 边界声明
 
-- 未提交任何平台竞价或交付，未调用写接口；本目录为本地试点产物。
+- 未提交任何平台竞价或交付，未调用平台写接口；仅把试点产物推送到公开 GitHub 仓库作为可引用的交付资产 URL。
 - 所有样例均为虚构演示数据，不含真实个人信息、企业信息或联系方式。
 - 未引入向境外发送数据的第三方 SDK；依赖仅 `ajv`，离线可运行。
